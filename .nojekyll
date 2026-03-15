@@ -1,0 +1,17 @@
+touch .nojekyll
+git add .nojekyll
+git commit -m "disable jekyll"
+git push
+```
+
+**Opção 2 — Mudar a source do Pages**
+
+No GitHub: Settings → Pages → Build and deployment → Source → troca de **"Deploy from a branch"** para **"GitHub Actions"** e escolhe **"Static HTML"** — ou melhor ainda, troca de volta para **"Deploy from a branch"** e garante que o branch é `main` e a pasta é `/ (root)`, não `/docs`.
+
+O erro `No such file or directory @ dir_chdir0 - /github/workspace/docs` indica que o Pages está procurando uma pasta `docs` que não existe. Provavelmente a configuração de source está apontando para `/docs` em vez de `/ (root)`.
+
+Verifica em Settings → Pages se está assim:
+```
+Source: Deploy from a branch
+Branch: main
+Folder: / (root)   ← precisa ser isso, não /docs
